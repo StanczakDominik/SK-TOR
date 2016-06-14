@@ -14,7 +14,7 @@ def prep_trajectory(message, target, sender):
     trajectory = list(nodes.keys())
     random.shuffle(trajectory)
 
-    lista = [target, [message]] #OSTATNI MUSI ZAWIERAĆ NAZWĘ
+    lista = [target, [message]] #OSTATNI MUSI ZAWIERAĆ NAZWĘ UŻYTKOWNIKA
     for node in trajectory:
         lista = [node, lista]
     target, lista = lista

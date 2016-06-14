@@ -2,9 +2,6 @@ import json
 import socket
 import argparse
 import sktor as skt
-import multiprocessing
-import os
-import time
 
 parser = argparse.ArgumentParser(description='Lorem ipsum!')
 parser.add_argument('current_node_ID', type=int, nargs='+',
@@ -19,12 +16,6 @@ s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 print("Listening on {}".format(skt.nodes[current_node_ID]))
 
 users = {}
-
-def info(title):
-    print(title)
-    print('module name:', __name__)
-    print('parent process:', os.getppid())
-    print('process id:', os.getpid())
 
 WAITING_FOR_ACK_IP = None
 def node_persistent_behavior(s):
@@ -48,7 +39,6 @@ def node_persistent_behavior(s):
 
         elif skt.ACKNOWLEDGED == received_string:
             print("Dostałem ACK od {}".format(origin_ip))
-            # import ipdb; ipdb.set_trace()
             skt.send(s, skt.ACKNOWLEDGED, WAITING_FOR_ACK_IP)
         elif skt.SEND_FAIL == received_string:
             print("Dostałem SEND_FAIL od {}".format(origin_ip))
@@ -71,10 +61,6 @@ def node_persistent_behavior(s):
             skt.send(s, paczka, target)
             WAITING_FOR_ACK_IP = origin_ip
 
-
-
 while(True):
     node_persistent_behavior(s)
-    # p = multiprocessing.Process(target=node_persistent_behavior, args=(s,))
-    # p.start()
 s.close()
