@@ -1,12 +1,6 @@
 import json
 import random
-# import socket
-# import multiprocessing
-# import argparse
 from data import nodes
-
-# nodes.pop(nodes[socket.get]) #zastanowic sie czy warto usuwac biezacy node z listy nodes powyzej
-# czy to czasami nie wymaga zmodyfikowania prep_trajectory zeby bralo jedynie elementy z nodes.keys
 
 N = len(nodes)
 ACKNOWLEDGED = "ACKNOWLEDGED"
